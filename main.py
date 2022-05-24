@@ -6,6 +6,7 @@ import random # рандом есть рандом
 import time # импорт времени
 import playsound # проигрывание звукозаписи
 import speech_recognition as sr # библиотека распознование голоса
+import webbrowser
 import os
 
 
@@ -69,6 +70,11 @@ def do_this_command(message): # выполнение команды
         time = '12:58'
         textmikki.insert("insert", 'Mikki:' + '\n' + time + '\n')
         say_message(time)
+    elif 'открой youtube' in message:
+        say_message("Открываю")
+        textmikki.insert("insert", 'Mikki:' + '\n' + "Открываю" + '\n')
+        url = 'https://www.youtube.com/'
+        webbrowser.open(url)
     else:
         say_message(message)
 
