@@ -7,6 +7,8 @@ import time # импорт времени
 import playsound # проигрывание звукозаписи
 import speech_recognition as sr # библиотека распознование голоса
 import webbrowser
+from datetime import datetime
+import pyautogui as pg
 import os
 
 
@@ -64,16 +66,49 @@ def do_this_command(message): # выполнение команды
         textmikki.insert("insert", 'Mikki:' + '\n' + ans + '\n')
         say_message(ans)
         sys.exit()
-    elif 'спой' in message:
-        say_message('нет')
-    elif 'время' in message:
-        time = '12:58'
-        textmikki.insert("insert", 'Mikki:' + '\n' + time + '\n')
-        say_message(time)
     elif 'открой youtube' in message:
         say_message("Открываю")
         textmikki.insert("insert", 'Mikki:' + '\n' + "Открываю" + '\n')
         url = 'https://www.youtube.com/'
+        webbrowser.open(url)
+    elif 'открой сайт с погодой' in message:
+        say_message("Открываю")
+        textmikki.insert("insert", 'Mikki:' + '\n' + "Открываю" + '\n')
+        url = 'https://rp5.ru'
+        webbrowser.open(url)
+
+    elif 'своё имя' in message:
+        say_message("Меня зовут Микки")
+        textmikki.insert("insert", 'Mikki:' + '\n' + "Меня зовут Микки" + '\n')
+
+    elif 'меня зовут' in message:
+        say_message("Классное имя")
+        textmikki.insert("insert", 'Mikki:' + '\n' + "Классное имя" + '\n')
+
+    elif 'спасибо' in message:
+        say_message("Всегда пожалуйста")
+        textmikki.insert("insert", 'Mikki:' + '\n' + "Всегда пожалуйста" + '\n')
+    elif 'открой блокнот' in message:
+        os.system("notepad.exe")
+    elif 'запиши в блокнот' in message:
+        say_message("Что мне записать?")
+        note = listen_command()
+        file = open('zametka.txt', 'w')
+        file.write(note)
+    elif 'скриншот' in message:
+        pg.screenshot("yourPic.png")
+        textmikki.insert("insert", 'Mikki:' + '\n' + "Сделал скриншот" + '\n')
+
+    elif 'сколько времени' in message:
+        now = datetime.now()
+        text = "Сейчас " + str(now.hour) + " " + str(now.minute)
+        say_message(text)
+        textmikki.insert("insert", 'Mikki:' + '\n' + text + '\n')
+
+
+    elif 'найди в гугле' in message:
+        message = message.replace('найди в гугле', ' ')
+        url = "https://google.com/search?q=" + message
         webbrowser.open(url)
     else:
         say_message(message)
